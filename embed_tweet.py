@@ -18,10 +18,8 @@ And also provides a link for Twitter username.
 .. _Embedded-tweet: https://dev.twitter.com/docs/embedded-tweets
 
 """
-
-from pelican import signals
 import re
-
+from pelican import signals
 
 def embed_tweet(content):
     if not content._content:
