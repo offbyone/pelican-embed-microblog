@@ -5,6 +5,7 @@ Embedding tweets into your Pelican blog posts. This repo is an advance
 version of the plugin from
 `lqez <https://github.com/lqez/pelican-embed-tweet>`__ which hasn't the
 config for the style.
+
 +---------+----------------------------------------+
 | Author  | Fundor333                              |
 +=========+========================================+
