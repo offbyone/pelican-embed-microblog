@@ -11,7 +11,7 @@ def tweet(content, config_data):
         r'(^|[^@\w])@(\w{1,15})/status/(\d+)\b',
         '\\1<blockquote class="twitter-tweet" ' +
         config_data +
-        ' align="center"><a href="https://twitter.com/\\2/status/\\3">Tweet of \\2/\\3</a></blockquote>',
+        '><a href="https://twitter.com/\\2/status/\\3">Tweet of \\2/\\3</a></blockquote>',
         content
     ) + '<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>'
 
@@ -19,7 +19,7 @@ def tweet(content, config_data):
 def momenti(content):
     return re.sub(
         r'(^|[^@\w])@(\w{1,15})/moments/(\d+)\b',
-        '\\1<blockquote class="twitter-tweet" align="center">'+
+        '\\1<blockquote class="twitter-tweet">'+
         '<a class="twitter-moment" href="https://twitter.com/i/moments/\\3">Tweet of \\2/\\3</a></blockquote>'+
         '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> ', content)
 
