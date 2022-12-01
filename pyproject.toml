@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pelican-embed-microblog"
+description = "A Pelican plugin that wrapps references to twitter et al. Forked from pelican-advance-embed-tweet"
+readme = "README.rst"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = [
+  "pelican",
+  "blog",
+  "static site generator",
+  "social networking"
+]
+authors = [
+  { name = "Chris Rose", email="offline@offby1.net" },
+  { name = "Fundor333" },
+  { name = "Sven Kreiss" },
+]
+dynamic = ["version"]
+dependencies = [
+  "beautifulsoup4>=4.11,<5.0",
+]
+
+[project.optional-dependencies]
+docs = ["sphinx~=4.0", "alabaster~=0.7"]
+tests = [
+  "pytest>=5.0",
+  "pytest-sugar",
+  "pytest-xdist",
+  "coverage[toml]",
+  "pelican",
+]
+dev = [
+  "pelican-embed-microblog[docs,tests]",
+  "towncrier",
+  "twine",
+  "pytest-mypy",
+  "flake8",
+  "black",
+  "tox",
+  "tox-asdf",
+  "doc2dash",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/pelican_embed_microblog/_version.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/changelog.d/*.rst",
+  "/.github",
+]
+[tool.hatch.build.targets.wheel]
+exclude = [
+  "/examples",
+]
+packages = [
+  "src/pelican_embed_microblog",
+]
+
+[tool.coverage.run]
+parallel = true
+branch = true
+source = ["pelican_embed_microblog"]
+
+[tool.coverage.paths]
+source = ["src", ".tox/*/site-packages"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.black]
+line_length = 100
+
+[tool.interrogate]
+verbose = 2
+fail-under = 100
+whitelist-regex = ["test_.*"]
+
+
+[tool.isort]
+profile = "black"
+known_first_party = "pelican_embed_microblog"
+
+[tool.towncrier]
+    package = "pelican_embed_microblog"
+    package_dir = "src"
+    filename = "CHANGELOG.rst"
+    directory = "changelog.d"
+    issue_format = "`#{issue} <https://github.com/offbyone/pelican-embed-microblog/issues/{issue}>`_"

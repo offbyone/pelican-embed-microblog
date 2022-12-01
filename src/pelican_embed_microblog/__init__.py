@@ -1,2 +1,2 @@
-__version__ = "1.1.3"
+from ._version import __version__
 from .advance_embed_tweet import *
