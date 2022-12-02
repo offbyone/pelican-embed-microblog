@@ -54,7 +54,7 @@ dependencies = [
 
 [tool.hatch.envs.dev.scripts]
 cov = "pytest --cov=pelican_embed_microblog"
-
+cov-ci = "coverage run -p -m pytest"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/pelican_embed_microblog/_version.py"
