@@ -1,11 +1,22 @@
 import os
-from bs4 import BeautifulSoup
+import unittest.mock
 
 import pytest
+from bs4 import BeautifulSoup
 from pelican.contents import Article, Content
 from pelican.settings import DEFAULT_CONFIG
 
-from pelican_embed_microblog.advance_embed_tweet import embed_tweet
+from pelican_embed_microblog.embed_microblog import embed_tweet
+
+
+@pytest.fixture(autouse=True)
+def force_debug():
+    import pelican_embed_microblog.embed_microblog
+
+    with unittest.mock.patch.object(
+        pelican_embed_microblog.embed_microblog, "PELICAN_MICROBLOG_DEBUG", True
+    ):
+        yield
 
 
 @pytest.fixture(name="settings")
