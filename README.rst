@@ -1,4 +1,4 @@
-Pelican plugin: Advance Embed Tweet
+Pelican plugin: Embed Microblogs
 ===================================
 
 Embedding tweets into your Pelican blog posts. This repo is an advance
@@ -6,25 +6,24 @@ version of the plugin from
 `lqez <https://github.com/lqez/pelican-embed-tweet>`__ which hasn't the
 config for the style.
 
-+---------+----------------------------------------+
-| Author  | Fundor333                              |
-+=========+========================================+
-| Email   | f333@fundor333.com                     |
-+---------+----------------------------------------+
-| Homepage| https://www.fundor333.com              |
-+---------+----------------------------------------+
-| Github  | https://github.com/fundor333           |
-+---------+----------------------------------------+
-| Twitter | https://twitter.com/fundor333          |
-+---------+----------------------------------------+
++---------+-----------------------------------------+
+| Author   | Chris Rose                             |
++==========+========================================+
++----------+----------------------------------------+
+| Homepage | https://offby1.website                 |
++----------+----------------------------------------+
+| Github   | https://github.com/offbyone            |
++----------+----------------------------------------+
+| Mastodon | https://wandering.shop/@offby1         |
++----------+----------------------------------------+
 
 # How to use it
 ---------------
 
-1. Install the plugin with ``pip install pelican_advance_embed_tweet``
-2. Put ``pelican_advance_embed_tweet`` into plugin list of settings.
+1. Install the plugin with ``pip install pelican-embed-microblog``
+2. Put ``pelican_embed_microblog`` into plugin list of settings.
 
-   -  ``PLUGINS = ['pelican_advance_embed_tweet']``
+   -  ``PLUGINS = ['pelican_embed_microblog']``
 
 3. Add your config into the ``pelicanconf.py``
 
@@ -67,3 +66,10 @@ Api <https://dev.twitter.com/web/embedded-tweets/parameters>`__.
 | _DNT     | are not used for purposes that include personalized suggestions |
 |          | and personalized ads.                                           |
 +----------+-----------------------------------------------------------------+
+
+Acknowledgments
+---------------
+
+Thanks to `lqez <https://github.com/lqez/pelican-embed-tweet>`__ for the
+original, and to `fundor333 <https://github.com/fundor333/pelican-advance-embed-tweet>`__ who forked the
+original embed tweet plugin, on which this is based.
