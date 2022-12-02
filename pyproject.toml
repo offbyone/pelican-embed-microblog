@@ -30,6 +30,7 @@ tests = [
   "pytest>=5.0",
   "pytest-sugar",
   "pytest-xdist",
+  "pytest-cov",
   "coverage[toml]",
   "pelican",
 ]
@@ -40,13 +41,20 @@ dev = [
   "pytest-mypy",
   "flake8",
   "black",
-  "tox",
-  "tox-asdf",
   "doc2dash",
 ]
 
 [tool.hatch.version]
 source = "vcs"
+
+[tool.hatch.envs.dev]
+dependencies = [
+  "pelican-embed-microblog[dev]",
+]
+
+[tool.hatch.envs.dev.scripts]
+cov = "pytest --cov=pelican_embed_microblog"
+
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/pelican_embed_microblog/_version.py"
@@ -83,7 +91,6 @@ line_length = 100
 verbose = 2
 fail-under = 100
 whitelist-regex = ["test_.*"]
-
 
 [tool.isort]
 profile = "black"
