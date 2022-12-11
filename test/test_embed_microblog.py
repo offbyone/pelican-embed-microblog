@@ -1,5 +1,6 @@
 import os
 import unittest.mock
+from pelican import logging
 
 import pytest
 from bs4 import BeautifulSoup
@@ -10,9 +11,10 @@ from pelican_embed_microblog.embed_microblog import embed_tweet
 
 
 @pytest.fixture(autouse=True)
-def force_debug():
+def force_debug(caplog):
     import pelican_embed_microblog.embed_microblog
 
+    caplog.set_level(logging.DEBUG, logger="pelican_embed_microblog")
     with unittest.mock.patch.object(
         pelican_embed_microblog.embed_microblog, "PELICAN_MICROBLOG_DEBUG", True
     ):
@@ -102,6 +104,11 @@ valid_twitter_user_texts = pytest.mark.parametrize(
         "@offby1",
         "a link to @offby1",
         "@offby1 was here",
+        "I want @offby1's possessive to work",
+        "Having (@offby1) in parentheses should work",
+        "having a sentence end in @offby1.",
+        "having a sentence end in @offby1!",
+        "having a sentence end in @offby1?",
         "find @offby1 in the middle",
         "@offby1 is interested in @offby1 twice",
     ],
@@ -159,4 +166,52 @@ def test_moment_present(soup):
 @valid_moment_texts
 def test_moment_link_present_has_script(soup):
     assert soup.find("script", src="https://platform.twitter.com/widgets.js")
+    assert "async" in str(soup)
+
+
+valid_mastodon_user_texts = pytest.mark.parametrize(
+    "text",
+    [
+        "@offby1@wandering.shop",
+        "a link to @offby1@wandering.shop",
+        "@offby1@wandering.shop was here",
+        "I want @offby1@wandering.shop's possessive to work",
+        "having a sentence end in @offby1@wandering.shop.",
+        "having a sentence end in @offby1@wandering.shop!",
+        "having a sentence end in @offby1@wandering.shop?",
+        "find @offby1@wandering.shop in the middle",
+        "@offby1@wandering.shop is interested in @offby1@wandering.shop twice",
+        "trick @offyb1@with something that doesn't look like @offby1@wandering.shop",
+    ],
+)
+
+
+@valid_mastodon_user_texts
+def test_mastodon_user_link_present(soup, text):
+    assert soup.find("a", href="https://wandering.shop/@offby1")
+    assert len(soup.find_all("a", href="https://wandering.shop/@offby1")) == text.count(
+        "@offby1@wandering.shop"
+    )
+
+
+valid_toot_texts = pytest.mark.parametrize(
+    "text",
+    [
+        "a @offby1/status/31415926 toot",
+        "@offby1/status/31415926",
+        "two toots: @offby1/status/31415926 and @offby1/status/31415926",
+    ],
+)
+
+
+@valid_toot_texts
+@pytest.mark.xfail
+def test_toot_present(soup):
+    assert soup.find("a", href="https://wandering.shop/offby1/status/31415926")
+
+
+@valid_toot_texts
+@pytest.mark.xfail
+def test_toot_link_present_has_script(soup):
+    assert soup.find("script", src="https://platform.wandering.shop/widgets.js")
     assert "async" in str(soup)
