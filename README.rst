@@ -17,8 +17,8 @@ config for the style.
 | Mastodon | https://wandering.shop/@offby1         |
 +----------+----------------------------------------+
 
-# How to use it
----------------
+How to enable it
+----------------
 
 1. Install the plugin with ``pip install pelican-embed-microblog``
 2. Put ``pelican_embed_microblog`` into plugin list of settings.
@@ -28,7 +28,7 @@ config for the style.
 3. Add your config into the ``pelicanconf.py``
 
 Config
-------
+~~~~~~
 
 The config implement the `Twitter
 Api <https://dev.twitter.com/web/embedded-tweets/parameters>`__.
@@ -66,6 +66,21 @@ Api <https://dev.twitter.com/web/embedded-tweets/parameters>`__.
 | _DNT     | are not used for purposes that include personalized suggestions |
 |          | and personalized ads.                                           |
 +----------+-----------------------------------------------------------------+
+
+Usage
+-----
+
+When writing a post, you can use any of the following notations to link to microblogging content:
+
+Usernames
+~~~~~~~~~
+
+Both Mastodon and Twitter usernames are supported. Any instance of "@username@host.name" will be replaced with a link to the appropriate instances' user account page, and any instance of "@username" will be replaced with a link to the twitter account page for the user.
+
+Twitter statuses
+~~~~~~~~~~~~~~~~
+
+To link a Twitter status, you write "@username/status/<numeric-tweet-id>"; essentially, you take the Twitter link itself and you replace "https://twitter.com/" with "@"
 
 Acknowledgments
 ---------------
